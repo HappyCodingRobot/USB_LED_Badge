@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="led_badge_test" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/led_badge_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DDEBUG_LIST_ALL" />
+					<Add option="-DDEBUG_VERBOSE" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/led_badge_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c11" />
+		</Compiler>
+		<Unit filename="badge.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="badge.h" />
+		<Unit filename="courier_font.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="courier_font.h" />
+		<Unit filename="font.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="font.h" />
+		<Unit filename="gfx/gfx_invader_vert.h" />
+		<Unit filename="gfx/gfx_press_start_long.h" />
+		<Unit filename="lucida_font.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lucida_font.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<debugger />
+			<lib_finder>
+				<lib name="libusb" />
+				<lib name="hidapi-libusb" />
+				<lib name="libpng12" />
+			</lib_finder>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
