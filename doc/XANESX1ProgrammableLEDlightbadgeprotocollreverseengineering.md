@@ -37,7 +37,7 @@ Report size: 64 byte (rep_num+data[64])
    	word:   Message 6 length (big endian)
    	word:   Message 7 length (big endian)
 ```
-The length counts in the 8x11 characters/elements.
+The length counts as the 8x11 characters/elements.
 
 **Brightness coding:**
 ```
