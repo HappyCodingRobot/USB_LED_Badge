@@ -14,7 +14,7 @@
 #include <byteswap.h>
 #include <hidapi/hidapi.h>
 #include "badge.h"
-#include "font.h"
+#include "gfx/font.h"
 
 
 /* Badge VID, PID, and interface */
@@ -98,10 +98,10 @@ struct header_s {
 
 struct msg_s {
     char *data;
-char msg[MAX_STR];
+//char msg[MAX_STR];
     int msg_len;
-bool blink;
-bool frame;
+//bool blink;
+//bool frame;
     uint8_t speed;
     effects_t pattern;
     char msgType;
@@ -109,7 +109,7 @@ bool frame;
 };
 
 
-struct header_s bHeader = {{"wang\0"},0x00,0x00,0x00,{"AFGH@DFG"},
+struct header_s bHeader = {{"wang\0"},0x00,0x00,0x00,{"FAGH@DFG"},
     {0}
 };
 
@@ -168,7 +168,8 @@ int badgeOpen() {
 
     // initialize message memories
     for (int i=0; i<N_MESSAGES; i++) {
-        bMessages[i].data = calloc(MAX_STR*BADGE_MSG_FONT_HEIGHT, (sizeof(char)));
+        //bMessages[i].data = calloc(MAX_STR*BADGE_MSG_FONT_HEIGHT, (sizeof(char)));
+        bMessages[i].data = calloc(MAX_STR*BADGE_MSG_FONT_HEIGHT, 1);
         bMessages[i].font = BADGE_MSG_FONT;
     }
     badgeIsOpen = true;
@@ -181,7 +182,8 @@ int badgeSend() {
     char ReportBuf[65];                         // report number in ReportBuf[0]
     //char *pReportNum = ReportBuf;
     char *pData  = ReportBuf+1;
-    char *pDisp = calloc(DISP_SIZE, sizeof(char));
+    //char *pDisp = calloc(DISP_SIZE, sizeof(char));
+    char *pDisp = calloc(DISP_SIZE, 1);
     char *pDIdx = pDisp, *pSIdx = pDisp;
     int data_len;
 
@@ -236,14 +238,14 @@ int badgeSend() {
 }
 
 
-void badgeAddTextMessage(uint8_t msg_num, char* msg, int msg_len) {
+int badgeAddTextMessage(uint8_t msg_num, char* msg, int msg_len) {
     const font_info_t *pFont;
     const char *bitmap;
     char *pDIdx;
     char c;
     // return if invalid message number or length
-    if (msg_num>=N_MESSAGES || msg_len==0) {
-        return;
+    if (msg_num>=N_MESSAGES || msg_len==0 || !badgeIsOpen) {
+        return -1;
     }
     if (msg_len>MAX_STR) {
         bMessages[msg_num].msg_len = MAX_STR;
@@ -266,18 +268,19 @@ void badgeAddTextMessage(uint8_t msg_num, char* msg, int msg_len) {
         //memset( pDIdx, 0xFF, BADGE_MSG_FONT_HEIGHT);    // >>>> DEBUG !!!!
         pDIdx += BADGE_MSG_FONT_HEIGHT;
     }
-
+    return(0);
 }
 
 
-void badgeAddGfxMessage(uint8_t msg_num, char *gfx, int gfx_width) {
+int badgeAddGfxMessage(uint8_t msg_num, char *gfx, int gfx_width) {
     // return if invalid message number or length
-    if (msg_num>=N_MESSAGES || gfx_width==0) {
-        return;
+    if (msg_num>=N_MESSAGES || gfx_width==0 || !badgeIsOpen) {
+        return -1;
     }
     memset( bMessages[msg_num].data, 0x00, MAX_STR*BADGE_MSG_FONT_HEIGHT);
     // TODO: size check of graphic data (?)
     bMessages[msg_num].msg_len = gfx_transform_to_bits(bMessages[msg_num].data, gfx_width, gfx);
+    return 0;
 }
 
 
@@ -303,12 +306,57 @@ void badgeSetEffects(uint8_t msg_num, effects_t msg_pat, uint8_t msg_spd, bool m
     bHeader.border |= (msg_frame << msg_num);
 }
 
+void badgeSetEffectsPat(uint8_t msg_num, effects_t msg_pat) {
+    uint8_t pat=0;
+    if (msg_num >= N_MESSAGES) {
+        return;
+    }
+    if (msg_pat>=E_left && msg_pat<=E_laser) {
+        pat = (uint8_t) msg_pat;
+    } else {
+        pat = (uint8_t) E_right;
+    }
+    bHeader.lineConf[msg_num] &= 0xF0;
+    bHeader.lineConf[msg_num] |= pat;
+}
+
+void badgeSetEffectsSpd(uint8_t msg_num, uint8_t msg_spd) {
+    uint8_t spd=0;
+    if (msg_num >= N_MESSAGES) {
+        return;
+    }
+    if (msg_spd>=MIN_SPEED && msg_spd<=MAX_SPEED) {
+        spd = msg_spd;
+    } else {
+        spd = (uint8_t) DEF_SPEED;
+    }
+    bHeader.lineConf[msg_num] &= 0x0F;
+    bHeader.lineConf[msg_num] |= (spd << 4);
+}
+
+void badgeSetEffectsBlink(uint8_t msg_num, bool msg_blink) {
+    if (msg_num >= N_MESSAGES) {
+        return;
+    }
+    bHeader.flash &= !(1 << msg_num);
+    bHeader.flash |= (msg_blink << msg_num);
+}
+
+void badgeSetEffectsFrame(uint8_t msg_num, bool msg_frame) {
+    if (msg_num >= N_MESSAGES) {
+        return;
+    }
+    bHeader.border &= !(1 << msg_num);
+    bHeader.border |= (msg_frame << msg_num);
+}
+
 
 void badgeSetBrightness(uint8_t msg_br) {
     if (msg_br <= MIN_BRIGHTNESS) {
         bHeader.brightness = (uint8_t) (msg_br << 4);
     }
 }
+
 
 int badgeClose() {
     // free message memories

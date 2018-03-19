@@ -4,6 +4,7 @@
 	<Project>
 		<Option title="led_badge_test" />
 		<Option pch_mode="2" />
+		<Option default_target="Release" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
@@ -11,8 +12,10 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters='-i0 -m &quot;hallo welt&quot; -f -i3 -mtest -b' />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-DDEBUG" />
 					<Add option="-DDEBUG_LIST_ALL" />
 					<Add option="-DDEBUG_VERBOSE" />
 				</Compiler>
@@ -55,6 +58,10 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="readpng.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="readpng.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />
@@ -63,6 +70,7 @@
 				<lib name="libusb" />
 				<lib name="hidapi-libusb" />
 				<lib name="libpng12" />
+				<lib name="zlib" />
 			</lib_finder>
 		</Extensions>
 	</Project>

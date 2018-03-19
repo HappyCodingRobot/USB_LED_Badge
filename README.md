@@ -1,7 +1,7 @@
 # USB LED Badge Programmer
 ## Word of warning
 This is just a very early development state / work in progress.<br>
-No fancy GUI, not even a usable commandline
+No fancy GUI, just a simple commandline
 
 
 ## Why ?
@@ -19,14 +19,51 @@ This badges are rechargeable and connects to the PC via USB as HID class devices
 * [Protocol reverse engineered](./doc/XANESX1ProgrammableLEDlightbadgeprotocollreverseengineering.md) (see ./doc/)
 * udev rule created (see ./doc/)
 * core routine to communicate with badge 
-* example programm with fixed text and graphic messages
+* example programm (cli only, no graphic import yet)
 
-**DoDo:** <br>
+**ToDo:** <br>
 *a lot..*
 
 
 #### Usage
-*tbd*
+Commandline options:<br>
+
+    -h  Show help.
+    -i  Set message index [0..7].
+    -m  Set message text.
+    -s  Set the message speed [1..8].
+    -e  Set the message effect [0..8].
+        0: to left
+        1: to right
+        2: scroll up
+        3: scroll down
+        4: Freeze
+        5: Animation
+        6: Snow
+        7: Volume
+        8: Laser
+    -b  Blink message.
+    -f  Set frame for message.
+    -B  Set the badge brightness [0..3]. This is for all messages.
+    -D  Demo mode. Use as the only argument.
+
+```
+badge -i[0..7] -m <text for message num i> <parameter for message num i> (next index with message and parameter ...)
+```
+
+Examples:<br>
+```bash
+badge -i0 -m "Hello World!" -e2 -s6
+```
+- writes one up scrolling message to slot 0 of the badge with speed 6
+```bash
+badge -i0 -m "Hello World!" -e2 -s6 -i6 -m "there is more.." -e1 -f
+```
+- writes 2 messages to slot 0 and 6
+```bash 
+badge -i0 -m "This" -e1 -s6 -i1 -m "is a" -e0 -f -i2 -mTest
+```
+- writes 3 messages, slots 0,1,2 to the badge
 
 #### Installation and software setup
 (*not much at the moment*)
@@ -41,7 +78,7 @@ Mostly, it should work to copy the rule and then plug in the device.<p>
 
 
 ## Links
-[the badge @Banggood](https://www.banggood.com/XANES-X1-DIY-Bicycle-Taillight-Programmable-LED-Electronic-Advertising-Display-Bicycle-TailLight-USB-p-1220458.html)
+[the badge @Banggood](https://www.banggood.com/XANES-X1-DIY-Bicycle-Taillight-Programmable-LED-Electronic-Advertising-Display-Bicycle-TailLight-USB-p-1220458.html) <br>
 [LD45](http://en.leadbike.cn/index.php?id=2154)
 
 

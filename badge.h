@@ -69,8 +69,9 @@ int badgeOpen(void);
  * \param msg_num   - Message number [0..7]
  * \param msg       - A pointer to the message text (characters)
  * \param msg_len   - Length of the message
+ * \return 0 or debug result on success, -1 on error.
  */
-void badgeAddTextMessage(uint8_t msg_num, char *msg, int msg_len);
+int badgeAddTextMessage(uint8_t msg_num, char *msg, int msg_len);
 
 
 /** \brief Add graphic to the message struct
@@ -78,12 +79,13 @@ void badgeAddTextMessage(uint8_t msg_num, char *msg, int msg_len);
  * \param msg_num   - Message number [0..7]
  * \param gfx       - A pointer to the graphics
  * \param gfx_width - Length of the graphic (in pixel)
+ * \return 0 or debug result on success, -1 on error.
  *
  * Converts and adds an image to a message struct. Excepts data as c array with
  * 1 byte/px, stored from left to right and top to bottom, a height of 11 pixels
  * (more than 11 are ignored).
  */
-void badgeAddGfxMessage(uint8_t msg_num, char *gfx, int gfx_width);
+int badgeAddGfxMessage(uint8_t msg_num, char *gfx, int gfx_width);
 
 
 /** \brief Sets the message effects and behavior to the message struct
@@ -123,8 +125,13 @@ int badgeClose(void);
 /**< helper functions */
 //void badgeClear(void); // needed ??
 //void badgeDrawChar(uint8_t id, char c, char *target);
-void badgeSetFont(uint8_t msg_num, uint8_t font_num);   // testing, use before badgeAddTextMessage()
+void badgeSetEffectsPat(uint8_t msg_num, effects_t msg_pat);
+void badgeSetEffectsSpd(uint8_t msg_num, uint8_t msg_spd);
+void badgeSetEffectsBlink(uint8_t msg_num, bool msg_blink);
+void badgeSetEffectsFrame(uint8_t msg_num, bool msg_frame);
+void badgeSetFont(uint8_t msg_num, uint8_t font_num);       // testing, use before badgeAddTextMessage()
 int gfx_transform_to_bits(char* data_out, int len, char* data_in);
+
 
 
 /**< debug functions */
