@@ -12,7 +12,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters='-i0 -m &quot;hallo welt&quot; -f -i3 -mtest -b' />
+				<Option parameters='-i0 -m &quot;hallo welt&quot; -e0 -f -i3 -mtest -b -e1' />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
@@ -41,20 +41,20 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="badge.h" />
-		<Unit filename="courier_font.c">
+		<Unit filename="gfx/courier_font.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="courier_font.h" />
-		<Unit filename="font.c">
+		<Unit filename="gfx/courier_font.h" />
+		<Unit filename="gfx/font.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="font.h" />
+		<Unit filename="gfx/font.h" />
 		<Unit filename="gfx/gfx_invader_vert.h" />
 		<Unit filename="gfx/gfx_press_start_long.h" />
-		<Unit filename="lucida_font.c">
+		<Unit filename="gfx/lucida_font.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lucida_font.h" />
+		<Unit filename="gfx/lucida_font.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

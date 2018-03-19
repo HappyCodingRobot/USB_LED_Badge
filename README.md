@@ -11,7 +11,7 @@ I got this neat little LED badge on a promotion sale. Unfortunately i didn't fou
 This project provides a very basic way to programm a USB LED badge with text and graphic messages under Linux.<br>
 It is developed under [code:blocks](http://www.codeblocks.org/), so there is no makefile available at the moment.<br>
 It works for the **XANES X1 DIY Bicycle Taillight**. The **Leadbike LD45** seems to use the same hardware.
-This badges are rechargeable and connects to the PC via USB as HID class devices. They support up to 8 messages that can be displayed all one after another or each one allone.
+This badges are rechargeable and connects to the PC via USB as HID class devices. They support up to 8 messages that can be displayed all one after another or each one alone.
 
 ## Software
 
