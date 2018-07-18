@@ -22,8 +22,8 @@ void readPNGtoMap(char *filename, char *pImg);
 /* Globals */
 static const char *help[3] = {
 	"USB Led-Badge CLI\n"
-	"Copyright (C) 2018 HappyCodingRobot\n\n"
-	"Usage: %s [options...]\n",
+	"Copyright (C) 2018 HappyCodingRobot\n v0.180319\n\n",
+	"Usage: %s [-h] [options...]\n",
 
 	"\nOptions:\n"
 	"\t-h  Show help.\n"
@@ -158,6 +158,7 @@ void readPNGtoMap(char *filename, char *pImg) {
 }
 
 
+// TODO: change parameter handling -> '-h' should be usable without badge connected
 
 int main(int argc, char *argv[]) {
     (void)argc;
@@ -188,7 +189,7 @@ int main(int argc, char *argv[]) {
     }
 #endif // DEBUG_VERBOSE
     if (argc == 1) {
-        printf(help[0], argv[0]);
+        printf(help[1], argv[0]);
         return EXIT_FAILURE;
     }
 
@@ -205,6 +206,7 @@ int main(int argc, char *argv[]) {
                 printf(help[0], argv[0]);
                 printf(help[1]);
                 printf(help[2]);
+                printf(help[3]);
                 badgeClose();
                 return EXIT_SUCCESS;
                 //break;

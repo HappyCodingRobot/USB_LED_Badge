@@ -21,6 +21,7 @@ nbproject/private/
 bin/
 obj/
 *.depend
+*.layout
 
 #ignore generated .class files
 *.class

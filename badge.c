@@ -108,9 +108,18 @@ struct msg_s {
     uint8_t font;
 };
 
-
+/*
 struct header_s bHeader = {{"wang\0"},0x00,0x00,0x00,{"FAGH@DFG"},
     {0}
+};
+*/
+struct header_s bHeader = {
+    .start = "wang\0",
+    .brightness = 0x00,
+    .flash = 0x00,
+    .border = 0x00,
+    .lineConf = "FAGH@DFG",
+    .msgLen = {0},
 };
 
 struct msg_s bMessages[N_MESSAGES];
