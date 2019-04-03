@@ -9,7 +9,7 @@ I got this neat little LED badge on a promotion sale. Unfortunately i didn't fou
 
 ## Info
 This project provides a very basic way to programm a USB LED badge with text and graphic messages under Linux.<br>
-It is developed under [code:blocks](http://www.codeblocks.org/), so there is no makefile available at the moment.<br>
+It is developed under [code:blocks](http://www.codeblocks.org/), ~~so there is no makefile available at the moment~~.<br>
 It works for the **XANES X1 DIY Bicycle Taillight**. The **Leadbike LD45** seems to use the same hardware.
 This badges are rechargeable and connects to the PC via USB as HID class devices. They support up to 8 messages that can be displayed all one after another or each one alone.
 
@@ -18,11 +18,11 @@ This badges are rechargeable and connects to the PC via USB as HID class devices
 **What is done so far:**
 * [Protocol reverse engineered](./doc/XANESX1ProgrammableLEDlightbadgeprotocollreverseengineering.md) (see ./doc/)
 * udev rule created (see ./doc/)
-* core routine to communicate with badge 
+* core routine to communicate with badge
 * example programm (cli only, no graphic import yet)
 
 **ToDo:** <br>
-*a lot..*
+*a lot.. maybe a GUI*
 
 
 #### Usage
@@ -60,7 +60,7 @@ badge -i0 -m "Hello World!" -e2 -s6
 badge -i0 -m "Hello World!" -e2 -s6 -i6 -m "there is more.." -e1 -f
 ```
 - writes 2 messages to slot 0 and 6
-```bash 
+```bash
 badge -i0 -m "This" -e1 -s6 -i1 -m "is a" -e0 -f -i2 -mTest
 ```
 - writes 3 messages, slots 0,1,2 to the badge

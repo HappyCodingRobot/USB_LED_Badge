@@ -13,7 +13,7 @@
 **Badge Protocol (Report #0)**
 
 Report size: 64 byte (rep_num+data[64])
- 
+
 **Header (first report to send):**
 ```
 	id[5]:  "wang",0x00
@@ -41,7 +41,7 @@ The length counts as the 8x11 characters/elements.
 
 **Brightness coding:**
 ```
-   	0x00xx0000
+   	0b00xx0000
        	^^ ----- 0: 100%, 1: 75%, 2: 50%, 3: 25%
 ```
 Brightness setting is global for all messages.
@@ -89,5 +89,3 @@ Display:
 
 Up to 6 'chars' are displayed directly on the display. Here the last 4 rows/bits are ignored. On fewer 'chars', the content is centered on the display. On more than 6 'chars', the 6th is fully used, depending on the chosen effect. <br>
 This behavior is important if bitmaps should be displayed.
-
-
