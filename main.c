@@ -20,7 +20,7 @@ void spaceinvaders(void);
 void readPNGtoMap(char *filename, char *pImg);
 
 /* Globals */
-static const char *help[3] = {
+static const char *help[4] = {
 	"USB Led-Badge CLI\n"
 	"Copyright (C) 2018 HappyCodingRobot\n v0.180319\n\n",
 	"Usage: %s [-h] [options...]\n",
@@ -137,7 +137,7 @@ void readPNGtoMap(char *filename, char *pImg) {
     //uch* readpng_get_image(double display_exponent, int* pChannels, ulg* pRowbytes);
     img_data = readpng_get_image(0, &image_channels, &image_rowbytes);
 #ifdef DEBUG_VERBOSE
-    printf("image channels= %i\nimage row bytes= %i\n", image_channels, image_rowbytes);
+    printf("image channels= %i\nimage row bytes= %li\n", image_channels, image_rowbytes);
 #endif // DEBUG_VERBOSE
     /* done with PNG file, cean up but do NOT nuke image_data! */
     readpng_cleanup(FALSE);

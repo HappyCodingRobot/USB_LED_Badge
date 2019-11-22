@@ -309,9 +309,9 @@ void badgeSetEffects(uint8_t msg_num, effects_t msg_pat, uint8_t msg_spd, bool m
         pat = (uint8_t) E_right;
     }
     bHeader.lineConf[msg_num] = (spd << 4) | pat;
-    bHeader.flash &= !(1 << msg_num);
+    bHeader.flash &= ~(1 << msg_num);
     bHeader.flash |= (msg_blink << msg_num);
-    bHeader.border &= !(1 << msg_num);
+    bHeader.border &= ~(1 << msg_num);
     bHeader.border |= (msg_frame << msg_num);
 }
 
@@ -347,7 +347,7 @@ void badgeSetEffectsBlink(uint8_t msg_num, bool msg_blink) {
     if (msg_num >= N_MESSAGES) {
         return;
     }
-    bHeader.flash &= !(1 << msg_num);
+    bHeader.flash &= ~(1 << msg_num);
     bHeader.flash |= (msg_blink << msg_num);
 }
 
@@ -355,7 +355,7 @@ void badgeSetEffectsFrame(uint8_t msg_num, bool msg_frame) {
     if (msg_num >= N_MESSAGES) {
         return;
     }
-    bHeader.border &= !(1 << msg_num);
+    bHeader.border &= ~(1 << msg_num);
     bHeader.border |= (msg_frame << msg_num);
 }
 

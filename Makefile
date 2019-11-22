@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Os
+CFLAGS=-Os -Wall
 LIBS=-lz -lpng -lhidapi-hidraw -lusb
 OBJS=readpng.o  main.o badge.o gfx/font.o gfx/lucida_font.o gfx/courier_font.o
 

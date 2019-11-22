@@ -69,7 +69,7 @@
 			<lib_finder>
 				<lib name="libusb" />
 				<lib name="hidapi-libusb" />
-				<lib name="libpng12" />
+				<lib name="libpng" />
 				<lib name="zlib" />
 			</lib_finder>
 		</Extensions>
